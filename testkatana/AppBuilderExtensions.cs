@@ -16,5 +16,9 @@ namespace testkatana
         {
             app.Use<MyOtherMiddlewareComponent>();
         }
+        public static void UseLoggingMiddleWare(this IAppBuilder app)
+        {
+            app.Use<LoggingMiddlewareComponent>();
+        }
     }
 }

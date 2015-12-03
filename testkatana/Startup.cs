@@ -10,10 +10,12 @@ namespace testkatana
     {
         public void Configuration(IAppBuilder app)
         {
+            app.UseLoggingMiddleWare();
             var middlewareOptions = new MyMiddlewareConfigOptions("Hello", "Santa");
             middlewareOptions.IncludeDate = true;
             app.UseMyMiddleWare(middlewareOptions);
             app.UseMyOtherMiddleWare();
+            
         }
     }
 }

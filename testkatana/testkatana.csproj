@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppBuilderExtensions.cs" />
+    <Compile Include="Middlewares\LoggingMiddlewareComponent.cs" />
     <Compile Include="Middlewares\MyMiddlewareComponent.cs" />
     <Compile Include="Middlewares\MyMiddlewareConfigOptions.cs" />
     <Compile Include="Program.cs" />
