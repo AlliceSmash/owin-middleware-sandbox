@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Owin.Hosting;
+using System;
 
 namespace testkatana
 {
@@ -10,6 +7,9 @@ namespace testkatana
     {
         static void Main(string[] args)
         {
+            WebApp.Start<Startup>("http://localhost:8080");
+            Console.WriteLine("Server Started; Press enter to Quit");
+            Console.ReadLine();
         }
     }
 }
