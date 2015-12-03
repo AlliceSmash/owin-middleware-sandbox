@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace testkatana
 {
+    using Microsoft.Owin;
     using System.IO;
     using AppFunc = Func<IDictionary<string, object>, Task>;
     public class Startup
@@ -22,19 +23,11 @@ namespace testkatana
         {
             AppFunc appFunc = async (IDictionary<string, object> environment) =>
             {
-                // Do something with the incoming request:
-                var response = environment["owin.ResponseBody"] as Stream;
-                using (var writer = new StreamWriter(response))
-                {
-                    await writer.WriteAsync("<h1>Hello from My First Middleware</h1>");
-                }
-                // Call the next Middleware in the chain:
+                IOwinContext context = new OwinContext(environment);
+                await context.Response.WriteAsync("<h1>Hello from my first middleware</h1>");
                 await next.Invoke(environment);
-                using (var writer = new StreamWriter(response))
-                {
-                    await writer.WriteAsync("<h1>After second middleware, say hello from My First Middleware</h1>");
-                }
-            };
+                await context.Response.WriteAsync("<h2>after invoking second middleware, say hi from first middleware </h1>");
+             };
             return appFunc;
         }
 
@@ -42,13 +35,8 @@ namespace testkatana
         {
             AppFunc appFunc = async (IDictionary<string, object> environment) =>
             {
-                // Do something with the incoming request:
-                var response = environment["owin.ResponseBody"] as Stream;
-                using (var writer = new StreamWriter(response))
-                {
-                    await writer.WriteAsync("<h1>Hello from My Second Middleware</h1>");
-                }
-                // Call the next Middleware in the chain:
+                IOwinContext context = new OwinContext(environment);
+                await context.Response.WriteAsync("<h1>Hello from my second middleware</h1>");
                 await next.Invoke(environment);
             };
             return appFunc;
