@@ -1,13 +1,15 @@
 ﻿using Owin;
+using testkatana.Middlewares;
 
 namespace testkatana
 {
     public static class AppBuilderExtensions
     {
 
-        public static void UseMyMiddleWare(this IAppBuilder app, string greetingOption)
+        public static void UseMyMiddleWare(this IAppBuilder app,
+            MyMiddlewareConfigOptions myMiddlewareConfigOptions)
         {
-            app.Use<MyMiddlewareComponent>(greetingOption);
+            app.Use<MyMiddlewareComponent>(myMiddlewareConfigOptions);
         }
 
         public static void UseMyOtherMiddleWare(this IAppBuilder app)

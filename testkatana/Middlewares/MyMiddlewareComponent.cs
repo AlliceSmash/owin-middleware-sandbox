@@ -5,22 +5,23 @@ using System.Threading.Tasks;
 namespace testkatana
 {
     using Microsoft.Owin;
+    using Middlewares;
     using AppFunc = Func<IDictionary<string, object>, Task>;
 
     public class MyMiddlewareComponent
     {
         AppFunc _next;
-        string _greetings;
-        public MyMiddlewareComponent(AppFunc next, string greetings)
+        MyMiddlewareConfigOptions _options;
+        public MyMiddlewareComponent(AppFunc next, MyMiddlewareConfigOptions options)
         {
             _next = next;
-            _greetings = greetings;
+            _options = options;
         }
 
         public async Task Invoke(IDictionary<string, object> environment)
         {
             IOwinContext context = new OwinContext(environment);
-            await context.Response.WriteAsync(string.Format("<h1>{0}</h1>", _greetings));
+            await context.Response.WriteAsync(string.Format("<h1>{0}</h1>",_options.GetGreeting()));
             await _next.Invoke(environment);
             await context.Response.WriteAsync("<h4>Say hi again after you invoke second middleware</h4>");
         }
