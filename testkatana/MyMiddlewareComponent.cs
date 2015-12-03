@@ -10,15 +10,17 @@ namespace testkatana
     public class MyMiddlewareComponent
     {
         AppFunc _next;
-        public MyMiddlewareComponent(AppFunc next)
+        string _greetings;
+        public MyMiddlewareComponent(AppFunc next, string greetings)
         {
             _next = next;
+            _greetings = greetings;
         }
 
         public async Task Invoke(IDictionary<string, object> environment)
         {
             IOwinContext context = new OwinContext(environment);
-            await context.Response.WriteAsync("<h1>Hello from my first middleware</h1>");
+            await context.Response.WriteAsync(string.Format("<h1>{0}</h1>", _greetings));
             await _next.Invoke(environment);
             await context.Response.WriteAsync("<h4>Say hi again after you invoke second middleware</h4>");
         }

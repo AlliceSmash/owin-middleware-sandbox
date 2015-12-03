@@ -5,9 +5,9 @@ namespace testkatana
     public static class AppBuilderExtensions
     {
 
-        public static void UseMyMiddleWare(this IAppBuilder app)
+        public static void UseMyMiddleWare(this IAppBuilder app, string greetingOption)
         {
-            app.Use<MyMiddlewareComponent>();
+            app.Use<MyMiddlewareComponent>(greetingOption);
         }
 
         public static void UseMyOtherMiddleWare(this IAppBuilder app)

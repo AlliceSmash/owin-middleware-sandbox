@@ -9,7 +9,7 @@ namespace testkatana
     {
         public void Configuration(IAppBuilder app)
         {
-            app.UseMyMiddleWare();
+            app.UseMyMiddleWare("This is the new greeting for MyMiddleWare");
             app.UseMyOtherMiddleWare();
         }
     }
