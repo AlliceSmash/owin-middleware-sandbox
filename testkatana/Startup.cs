@@ -12,34 +12,10 @@ namespace testkatana
     {
         public void Configuration(IAppBuilder app)
         {
-            var middleware = new Func<AppFunc, AppFunc>(MyMiddleWare);
-            var secondMiddleware = new Func<AppFunc, AppFunc>(MyOtherMiddleWare);
-
-            app.Use(middleware);
-            app.Use(secondMiddleware);
+            app.Use<MyMiddlewareComponent>();
+            app.Use<MyOtherMiddlewareComponent>();
         }
 
-        public AppFunc MyMiddleWare(AppFunc next)
-        {
-            AppFunc appFunc = async (IDictionary<string, object> environment) =>
-            {
-                IOwinContext context = new OwinContext(environment);
-                await context.Response.WriteAsync("<h1>Hello from my first middleware</h1>");
-                await next.Invoke(environment);
-                await context.Response.WriteAsync("<h2>after invoking second middleware, say hi from first middleware </h1>");
-             };
-            return appFunc;
-        }
-
-        public AppFunc MyOtherMiddleWare(AppFunc next)
-        {
-            AppFunc appFunc = async (IDictionary<string, object> environment) =>
-            {
-                IOwinContext context = new OwinContext(environment);
-                await context.Response.WriteAsync("<h1>Hello from my second middleware</h1>");
-                await next.Invoke(environment);
-            };
-            return appFunc;
-        }
+       
     }
 }
