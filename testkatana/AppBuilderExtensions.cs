@@ -18,7 +18,12 @@ namespace testkatana
         }
         public static void UseLoggingMiddleWare(this IAppBuilder app)
         {
-            app.Use<LoggingMiddlewareComponent>();
+            app.Use<LoggingComponent>();
+        }
+
+        public static void UseAuthenticationMiddleWare(this IAppBuilder app)
+        {
+            app.Use<AuthenticationComponent>();
         }
     }
 }

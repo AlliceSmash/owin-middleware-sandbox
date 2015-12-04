@@ -11,6 +11,7 @@ namespace testkatana
         public void Configuration(IAppBuilder app)
         {
             app.UseLoggingMiddleWare();
+            app.UseAuthenticationMiddleWare();
             var middlewareOptions = new MyMiddlewareConfigOptions("Hello", "Santa");
             middlewareOptions.IncludeDate = true;
             app.UseMyMiddleWare(middlewareOptions);

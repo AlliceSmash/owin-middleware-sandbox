@@ -9,10 +9,10 @@ using Microsoft.Owin;
 namespace testkatana.Middlewares
 {
     using AppFunc = Func<IDictionary<string, object>, Task>;
-    public class LoggingMiddlewareComponent
+    public class LoggingComponent
     {
         AppFunc _next;
-        public LoggingMiddlewareComponent(AppFunc next)
+        public LoggingComponent(AppFunc next)
         {
             _next = next;
         }
