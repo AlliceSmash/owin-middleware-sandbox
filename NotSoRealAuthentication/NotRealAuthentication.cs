@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using Owin;
 using Microsoft.Owin;
 
-namespace testkatana.Middlewares
+namespace NotSoRealAuthentication
 {
     using AppFunc = Func<IDictionary<string, object>, Task>;
-    public class AuthenticationComponent
+    public class NotRealAuthentication
     {
         AppFunc _next;
-        public AuthenticationComponent(AppFunc next)
+        public NotRealAuthentication(AppFunc next)
         {
             _next = next;
         }

@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
-namespace testkatana
+using Microsoft.Owin;
+namespace MyMiddleware
 {
-    using Microsoft.Owin;
-    using Middlewares;
-    using AppFunc = Func<IDictionary<string, object>, Task>;
 
-    public class MyMiddlewareComponent
+     using AppFunc = Func<IDictionary<string, object>, Task>;
+
+    public class MyMiddleware
     {
         AppFunc _next;
         MyMiddlewareConfigOptions _options;
-        public MyMiddlewareComponent(AppFunc next, MyMiddlewareConfigOptions options)
+        public MyMiddleware(AppFunc next, MyMiddlewareConfigOptions options)
         {
             _next = next;
             _options = options;
@@ -31,10 +30,10 @@ namespace testkatana
         }
     }
 
-    public class MyOtherMiddlewareComponent
+    public class MyOtherMiddleware
     {
         AppFunc _next;
-        public MyOtherMiddlewareComponent(AppFunc next)
+        public MyOtherMiddleware(AppFunc next)
         {
             _next = next;
         }
