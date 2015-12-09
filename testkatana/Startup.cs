@@ -14,10 +14,10 @@ namespace testkatana
         public void Configuration(IAppBuilder app)
         {
             app.UseNotRealLogging();
-        //    app.UseNotRealAuthentication();
-            //var middlewareOptions = new MyMiddlewareConfigOptions("Hello", "Santa");
-            //middlewareOptions.IncludeDate = true;
-            //app.UseMyMiddleware(middlewareOptions);
+            //    app.UseNotRealAuthentication();
+            var middlewareOptions = new MyMiddlewareConfigOptions("Hello", "Santa");
+            middlewareOptions.IncludeDate = true;
+            app.UseMyMiddleware(middlewareOptions);
 
             var webApiConfiguration = ConfigureWebApi();
             app.UseWebApi(webApiConfiguration);

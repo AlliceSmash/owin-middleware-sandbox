@@ -19,14 +19,15 @@ namespace MyMiddleware
 
         public async Task Invoke(IDictionary<string, object> environment)
         {
-            IOwinContext context = new OwinContext(environment);
-            await context.Response.WriteAsync(string.Format("<h1>{0}</h1>",_options.GetGreeting()));
             await _next.Invoke(environment);
+            IOwinContext context = new OwinContext(environment);
 
-            IOwinContext newcontext = new OwinContext(environment);
-            newcontext.Response.StatusCode = 200;
-            newcontext.Response.ReasonPhrase = "OK";
-            await newcontext.Response.WriteAsync("<h4>Say hi again after you invoke second middleware</h4>");
+            //await context.Response.WriteAsync(string.Format("<h1>{0}</h1>", _options.GetGreeting()));
+            Console.WriteLine("Hello, you are in my middleware");
+            //IOwinContext newcontext = new OwinContext(environment);
+            //newcontext.Response.StatusCode = 200;
+            //newcontext.Response.ReasonPhrase = "OK";
+            //await newcontext.Response.WriteAsync("<h4>Say hi again after you invoke second middleware</h4>");
         }
     }
 
