@@ -29,6 +29,16 @@ namespace OwinSelfHostMinimalClient
             return result;
         }
 
+        public HttpResponseMessage  AddCompany(Company company)
+        {
+            HttpResponseMessage response;
+            using(var client = CreateClient())
+            {
+                response = client.PostAsJsonAsync(client.BaseAddress, company).Result;
+            }
+            return response;
+        }
+
         public Company GetCompany(int id)
         {
             HttpResponseMessage response;

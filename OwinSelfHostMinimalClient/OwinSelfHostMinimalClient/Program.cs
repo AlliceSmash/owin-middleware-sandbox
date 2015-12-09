@@ -16,16 +16,22 @@ namespace OwinSelfHostMinimalClient
             var companies = companyClient.GetCompanies();
             WriteCompaniesList(companies);
 
-            // int nextId = (from c in companies select c.Id).Max() + 1;
+            int nextId = (from c in companies select c.Id).Max() + 1;
 
-            //Console.WriteLine("Add a new company...");
-            //var result = companyClient.AddCompany(
-            //    new Company
-            //    {
-            //        Id = nextId,
-            //        Name = string.Format("New Company #{0}", nextId)
-            //    });
-            //WriteStatusCodeResult(result);
+            Console.WriteLine("Add a new company...");
+            var result = companyClient.AddCompany(
+                new Company
+                {
+                    Id = nextId,
+                    Name = string.Format("New Company #{0}", nextId)
+                });
+            WriteStatusCodeResult(result.StatusCode);
+
+            Console.WriteLine("After adding a new company, here is the list of companies:");
+            companies = companyClient.GetCompanies();
+            WriteCompaniesList(companies);
+
+            Console.WriteLine("The first company is: ");
             var company = companyClient.GetCompany(1);
             if (null != company) WriteCompany(company);
 
@@ -37,16 +43,11 @@ namespace OwinSelfHostMinimalClient
                 Console.WriteLine("Id: {0} Name: {1}", company.Id, company.Name);
         }
 
-
         static void WriteCompaniesList(IEnumerable<Company> companies)
         {
-            foreach (var company in companies)
-            {
-                Console.WriteLine("Id: {0} Name: {1}", company.Id, company.Name);
-            }
+            companies.ToList().ForEach(WriteCompany);
             Console.WriteLine("");
         }
-
 
         static void WriteStatusCodeResult(System.Net.HttpStatusCode statusCode)
         {
