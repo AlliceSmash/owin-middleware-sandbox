@@ -49,5 +49,27 @@ namespace OwinSelfHostMinimalClient
             var result = response.Content.ReadAsAsync< Company>().Result;
             return result;
         }
+
+        public HttpResponseMessage Update(Company company)
+        {
+            HttpResponseMessage response;
+            using(var client = CreateClient())
+            {
+                response = client.PutAsJsonAsync(client.BaseAddress, company).Result;
+            }
+
+            return response;
+        }
+
+        public HttpResponseMessage DeleteCompany(int id)
+        {
+            HttpResponseMessage response;
+            using (var client = CreateClient())
+            {
+                response = client.DeleteAsync(new Uri(client.BaseAddress, id.ToString())).Result;
+            }
+
+            return response;
+        }
     }
 }

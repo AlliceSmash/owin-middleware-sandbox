@@ -31,10 +31,22 @@ namespace OwinSelfHostMinimalClient
             companies = companyClient.GetCompanies();
             WriteCompaniesList(companies);
 
-            Console.WriteLine("The first company is: ");
+             Console.WriteLine("The first company is: ");
             var company = companyClient.GetCompany(1);
             if (null != company) WriteCompany(company);
 
+            Console.WriteLine("Updating that company:");
+            company.Name = "New Microsoft";
+            companyClient.Update(company);
+            Console.WriteLine("The updated company is: ");
+            WriteCompany(companyClient.GetCompany(1));
+
+            Console.WriteLine("Deleting the last company:");
+            var response = companyClient.DeleteCompany(nextId);
+            WriteStatusCodeResult(response.StatusCode);
+
+            Console.WriteLine("After all updates, the current list of companies is:");
+            WriteCompaniesList(companyClient.GetCompanies());
             Console.Read();
         }
 
