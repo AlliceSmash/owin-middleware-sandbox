@@ -44,12 +44,14 @@ namespace testkatana
         {
             var db = Database.OpenConnection(connectionString);
             db.Company.Insert(Id: "1", Name: "Microsoft");
+            db.Company.Insert(Id: "2", Name: "Google");
+            db.Company.Insert(Id: "3", Name: "Apple");
         }
 
         public void UninstallDatabase()
         {
             var connStr =
-                ConfigurationManager.ConnectionStrings["running-journal"].ConnectionString;
+                ConfigurationManager.ConnectionStrings["katana-db"].ConnectionString;
             this.UninstallDatabase(connStr);
         }
 
@@ -64,8 +66,8 @@ namespace testkatana
                 var dropCmd = @"
                     IF EXISTS (SELECT name
                                FROM master.dbo.sysdatabases
-                               WHERE name = N'RunningJournal')
-                    DROP DATABASE [RunningJournal];";
+                               WHERE name = N'TestKatanaDb')
+                    DROP DATABASE [TestKatanaDb];";
                 using (var cmd = new SqlCommand(dropCmd, conn))
                     cmd.ExecuteNonQuery();
             }

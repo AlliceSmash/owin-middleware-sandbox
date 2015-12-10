@@ -22,5 +22,14 @@ namespace testkatana.Controllers
             IEnumerable<Company> companies = db.Company.All();
             return companies;
         }
+
+        public Company   Get(int id)
+        {
+            var connStr = ConfigurationManager.ConnectionStrings["katana-db"].ConnectionString;
+            var db = Database.OpenConnection(connStr);
+
+             Company company =  db.Company.FindAllById(id).FirstOrDefault();
+            return company;
+        }
     }
 }

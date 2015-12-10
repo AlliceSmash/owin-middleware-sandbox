@@ -19,6 +19,7 @@ namespace OwinWebApiClient_DB
             client.BaseAddress = new Uri(new Uri(_hostUri), "api/companies/");
             return client;
         }
+
         public IEnumerable<Company> GetCompanies()
         {
             HttpResponseMessage response;
@@ -28,9 +29,23 @@ namespace OwinWebApiClient_DB
             }
 
             var result = response.Content.ReadAsStringAsync()
-                .ContinueWith(c=> JsonConvert.DeserializeObject<List<Company>>(c.Result));
+                .ContinueWith(c => JsonConvert.DeserializeObject<List<Company>>(c.Result));
+            return result.Result;
+        }
+
+        public Company GetCompany(int id)
+        {
+            HttpResponseMessage response;
+            using (var client = CreateClient())
+            {
+                response = client.GetAsync(new Uri(client.BaseAddress, id.ToString())).Result;
+            }
+
+            var result = response.Content.ReadAsStringAsync()
+                .ContinueWith(c => JsonConvert.DeserializeObject<Company>(c.Result));
+
             return result.Result;
         }
 
     }
-    }
+}

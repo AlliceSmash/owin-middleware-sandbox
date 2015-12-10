@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OwinWebApiClient_DB
+﻿namespace OwinWebApiClient_DB
 {
     public class Company
     {

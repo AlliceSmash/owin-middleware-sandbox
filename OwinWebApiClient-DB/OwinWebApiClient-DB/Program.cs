@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OwinWebApiClient_DB
 {
@@ -14,6 +12,9 @@ namespace OwinWebApiClient_DB
             var companyClient = new CompanyClient("http://localhost:8080");
             var companies = companyClient.GetCompanies();
             WriteCompaniesList(companies);
+
+            var company = companyClient.GetCompany(1);
+            WriteCompany(company);
             Console.ReadLine();
         }
 
@@ -24,7 +25,7 @@ namespace OwinWebApiClient_DB
 
         static void WriteCompaniesList(IEnumerable<Company> companies)
         {
-            companies.ToList().ForEach(WriteCompany);
+            companies.OrderBy(c => c.Id).ToList().ForEach(WriteCompany);
             Console.WriteLine("");
         }
 
