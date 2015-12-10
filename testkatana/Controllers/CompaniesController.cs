@@ -23,7 +23,7 @@ namespace testkatana.Controllers
             return companies;
         }
 
-        public Company   Get(int id)
+        public Company Get(int id)
         {
             var connStr = ConfigurationManager.ConnectionStrings["katana-db"].ConnectionString;
             var db = Database.OpenConnection(connStr);
