@@ -7,9 +7,11 @@ namespace testkatana
     {
         static void Main(string[] args)
         {
+            new Bootstrap().InstallDatabase();
             WebApp.Start<Startup>("http://localhost:8080");
             Console.WriteLine("Server Started; Press enter to Quit");
             Console.ReadLine();
+            new Bootstrap().UninstallDatabase();
         }
     }
 }
